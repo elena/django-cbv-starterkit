@@ -3,9 +3,9 @@ from django.contrib.sites.models import Site
 from django.db import models
 from model_utils.managers import PassThroughManager
 from tagging.fields import TagField
-from abstract.basics.models import AbstractBasic
-from abstract.contents import querysets
-from abstract.contents import utils
+from contrib.abstract.basics.models import AbstractBasic
+from contrib.abstract.contents import querysets
+from contrib.abstract.contents import utils
 
 
 class Content(AbstractBasic):

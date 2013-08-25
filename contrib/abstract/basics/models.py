@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from model_utils.managers import PassThroughManager
-from tagging.fields import TagField
-from abstract.basics.querysets import LiveQuerySet
+
+from contrib.abstract.basics import settings
+from contrib.abstract.basics.querysets import LiveQuerySet
 
 
 class AbstractAuthor(models.Model):
