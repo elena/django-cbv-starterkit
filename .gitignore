@@ -25,3 +25,5 @@ pip-log.txt
 .coverage
 .tox
 nosetests.xml
+
+db.sqlite3
