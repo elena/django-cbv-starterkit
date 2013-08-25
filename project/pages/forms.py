@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 from django import forms
-from project.qualifications.models import Qualification, QualificationType
-from thecut.authorship.forms import AuthorshipFormMixin
+from project.pages.models import Page, PageType
 
 
-class QualificationTypeForm(AuthorshipFormMixin, forms.ModelForm):
-    """A :py:class:`~django.forms.ModelForm` for a
-    :py:class:`~project.qualifications.models.QualificationType` instance.
+class PageTypeForm(forms.ModelForm): #AuthorshipFormMixin, forms.ModelForm):
+    """
+    :py:class:`~django.forms.ModelForm` for a
+    :py:class:`~project.pages.models.PageType` instance.
 
     This form takes an additional required argument when it is
     initialised: ``user``.
@@ -15,61 +15,41 @@ class QualificationTypeForm(AuthorshipFormMixin, forms.ModelForm):
     """
 
     class Meta(object):
-        fields = ['name', 'description']
-        model = QualificationType
+        fields = ['title', 'description']
+        model = PageType
 
-    def __init__(self, user, **kwargs):
-        """
-
-        :param user: A user instance, used to set ``created_by`` /
-            ``updated_by`` fields on save.
-        :type user: :py:class:`~project.accounts.models.User`
-
-        """
-
-        self.user = user
-        super(QualificationTypeForm, self).__init__(user, **kwargs)
-        self.fields['name'].widget.attrs.update({'autofocus': 'autofocus'})
+    def __init__(self, *args, **kwargs):
+        super(PageTypeForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs.update({'autofocus': 'autofocus'})
 
     def save(self, *args, **kwargs):
-        self.instance.account = self.user.account
-        return super(QualificationTypeForm, self).save(*args, **kwargs)
+        #self.instance.account = self.user.account
+        return super(PageTypeForm, self).save(*args, **kwargs)
 
 
-class QualificationForm(AuthorshipFormMixin, forms.ModelForm):
-    """A :py:class:`~django.forms.ModelForm` for a
-    :py:class:`~project.qualification.models.Qualification` instance.
-
-    This form takes an additional required argument when it is
-    initialised: ``person``.
-
+class PageForm(forms.ModelForm): #(AuthorshipFormMixin, forms.ModelForm):
+    """
+    :py:class:`~django.forms.ModelForm` for a
+    :py:class:`~project.page.models.Page` instance.
     """
 
-    type = forms.ModelChoiceField(queryset=QualificationType.objects.none())
+    type = forms.ModelChoiceField(queryset=PageType.objects.none())
     started_at = forms.DateTimeField(localize=True, required=False)
     ended_at = forms.DateTimeField(localize=True, required=False)
 
     class Meta(object):
-        fields = ['type', 'started_at', 'ended_at']
-        model = Qualification
+        fields = ['type']
+        model = Page
 
-    def __init__(self, user, person, **kwargs):
+    def __init__(self, user, *args, **kwargs):
         """
-
-        :param person: A :py:class:`~django.contrib.auth.moels.User` instance,
-        used to updated_by and created_by fields on save.
-        :param person: A person instance, used to set ``person`` field on save.
-        :type person: :py:class:`~project.people.models.Person`
-
+        :param user: A :py:class:`~django.contrib.auth.models.User` instance.
         """
-
-        self.person = person
-        super(QualificationForm, self).__init__(user, **kwargs)
+        super(PageForm, self).__init__(user, *args, **kwargs)
         self.fields['type'].queryset = self.get_type_queryset()
 
     def get_type_queryset(self):
-        return QualificationType.objects.filter(account=self.person.account)
+        return PageType.objects.filter(account=self.person.account)
 
     def save(self, *args, **kwargs):
-        self.instance.person = self.person
-        return super(QualificationForm, self).save(*args, **kwargs)
+        return super(PageForm, self).save(*args, **kwargs)
