@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, unicode_literals
 from django.contrib import messages
 from django.views import generic
 from project.pages.forms import PageForm

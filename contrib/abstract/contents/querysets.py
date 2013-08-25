@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, unicode_literals
 from django.contrib.sites.models import Site
-from abstract.basics.querysets import LiveQuerySet
+from contrib.abstract.basics.querysets import LiveQuerySet
 
 
 class ContentQuerySet(LiveQuerySet):
