@@ -94,23 +94,37 @@ All of the settings above are generated automatically by "startproject".
 # Additional django apps turned 'on'
 DJANGO_APPS = INSTALLED_APPS + (
     'django.contrib.sites',
+
+    # The full range of choices:
+    # 'django.contrib.admindocs',
+    # 'django.contrib.comments',
+    # 'django.contrib.flatpages',
+    # 'django.contrib.gis',
+    # 'django.contrib.formtools',
+    # 'django.contrib.humanize',
+    # 'django.contrib.redirects',
+    # 'django.contrib.sitemaps',
+    # 'django.contrib.syndication',
+    # 'django.contrib.webdesign',
 )
 
 THIRD_PARTY_APPS = (
     'south',
     'tagging',
     'debug_toolbar',
-    #'crispy_forms',  # Form layouts
-    #'avatar',  # for user avatars
+    #'crispy_forms',
+    #'avatar',
 )
 
-# Apps specific for this project go here.
-LOCAL_APPS = (
+PROJECT_APPS = (
+    'contrib.abstract.basics',
+    'contrib.abstract.contents',
+    'contrib.abstract.reordering',
     'project.pages',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#sites
 SITE_ID = 1
