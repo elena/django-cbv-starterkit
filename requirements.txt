@@ -1,4 +1,4 @@
-Django==1.6b1
+Django==1.11.18
 South==0.8.2
 django-debug-toolbar==0.9.4
 django-model-utils==1.4.0
